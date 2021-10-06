@@ -124,7 +124,7 @@ kind: Service
 metadata: 
     name: pod-2
 spec:
-    **type: ClusterIP**   
+    type: ClusterIP   
 ```
 
 **Para especificar que o serviço vai ser atribuido um determinado recurso
@@ -170,13 +170,13 @@ Agora que já aplicamos e reconfiguramos o nosso pod vamos continuar
 as configuração do nosso **svc**:
 
 - Definir que o trafégo recebido no svc será encaminhado para o pod-2
-    - Utilizar o **selector** e especificar o label vinculada ao recurso.
+    - Utilizar o **selector** para especificar o label vinculada ao recurso.
 
     **selector**:
         **app**:**second-pod**
 
 - Devemos também especificar em qual porta o Pod vai estar ouvindo para receber os dados
-    - No caso se você desejar  especificar que pod vai está ouvindo na porta que serviço
+    - No caso se você desejar  especificar que pod vai está ouvindo na mesma porta que serviço
     de encaminhamento:
     **ports**:
         **- port**: **80** 
@@ -188,7 +188,7 @@ as configuração do nosso **svc**:
         **- port**: **9651**
         **targetPort**: **80** 
     - Nesse exemplo todo tráfego direcionado a porta **9651** do nosso serviço será ecaminhado 
-    para porta **80** do **second-pod**
+    para porta **80** do **second-pod**.
 
 svc-pod-2.yaml
 ```
@@ -227,3 +227,49 @@ spec:
  
 ```
 
+ 
+#  Teste de compunicação 
+
+- O teste de comunição será realizado entre os POD's
+- As aplicações ainda não foram configuradas para serem expostas para fora do cluster.
+
+
+### Copiar as inforações de ip svc-pod2
+
+- Copiar o ip do ClusterIp referente ao svc-pod-2;
+
+- Colunas 
+    - Name : Especifica o nome do serviço 
+    - Type : Tipo de serviço 
+    - ClusterIP: IP fixo definido para o serviço 
+    - ExternalIP: IP externo que será utilizado para comunição externa
+    - Ports: 
+        - Porta de entrada serviço  : Porta de destino aplicação / protocolo  9651:80/TCP 
+        - Porta de entrada e destino / Protocolo  80/TCP 
+
+```
+kubectl get svc
+
+```
+
+### Entrar no POD-1
+
+- O seguinte comando pertimi acessar o container vinculado ao Pod para execução
+de comandos diretamente.
+
+```
+
+kubectl exec  -it pod-1 -- bash
+
+```
+
+### Testar a comunicação http entre pod-1 e pod-2 
+
+- Utilizar curl para realizar a solicitação http para o ip do service 
+
+- curl **ip do serviço**:**porta do serviço**
+
+- Agora podemos realizar testes deletando pod e recriando, os IP POD
+o do pode não irá mais influenciar a comunicação, devido que o serviço
+realizará todo o ecaminhamento de tráfego realizando resolução de nome 
+do pod utilizando o serviço de DNS.
