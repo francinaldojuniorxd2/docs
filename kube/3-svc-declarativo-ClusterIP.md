@@ -228,7 +228,7 @@ spec:
 ```
 
  
-#  Teste de compunicação 
+#  Teste de comunicação 
 
 - O teste de comunição será realizado entre os POD's
 - As aplicações ainda não foram configuradas para serem expostas para fora do cluster.
