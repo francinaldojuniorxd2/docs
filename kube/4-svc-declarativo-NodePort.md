@@ -27,8 +27,8 @@ svc-pod-1.yaml
 a unica alteração relevante e type, selector, ports e **nodePort**;
 
 - **nodePort** : É a porta que será utilizada para os clientes externos acessar 
-o serviços interno, essa porta varia de 30000 - 32767, então devemos setar um porta 
-fixa para não ocorrer um problema caso o serviço seja reiniciado e a porta trocada.
+o serviços interno, essa porta varia de 30000 - 32767, então devemos setar uma porta 
+fixa para não ocorrer um problema caso o serviço seja reiniciado a porta ser trocada.
 
 - Nesse exemplo vou configurar o serviço para receber a solicitações 
 na porta **8081** e encaminhar para para porta **80** do meu **first-pod**
@@ -60,7 +60,7 @@ kubectl apply -f svc-pod-1.yaml
 ## Vizualizar o IP do MASTER 
 
 - Vamos obter o ip do master que será responsável por encaminhar às requisições,
-quando configuramos o node porte falamos para o master que está porta estara dísponível para receber requisições.
+quando configuramos o NodePort falamos para o master que a porta específicada dísponível para receber requisições.
 
 - Definimos a porta 30000 para receber as requisições, todas as requisições que chegar nessa 
 determinada porta será encaminhada para porta 80 do nosso Pod.
