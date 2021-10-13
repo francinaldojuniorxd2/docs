@@ -18,6 +18,7 @@ kubectl get pods
 
 ```
 kubectl get pods -o wide
+
 ```
 
 ### Descrevendo  um Pod:
