@@ -1,0 +1,12 @@
+apiVersion: v1 # versão
+kind: Service # O tipo de recurso
+metadata: 
+    name: svc-pod-1 # Nome do serviço
+spec:
+    type: NodePort  # Tipo de serviço 
+    selector:
+        app: first-pod # Selecionando o Pod
+    ports:
+        - port: 8081 #  Porta de destino Service
+          targetPort: 80 # Porta de destino Pod
+          nodePort: 30000 #30000 - 32767  Portas Externas     
