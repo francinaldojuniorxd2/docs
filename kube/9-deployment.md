@@ -4,6 +4,7 @@
 - Pode se aplicar as replicas.
 - Com aplicação das replicas será criado um replicaSet do deployment, 
 para gerenciar o estados dos pods declarados.
+- Segue a mesma estrutura de declaração do ReplicaSet.
 
 pod-1-deployment.yaml
 

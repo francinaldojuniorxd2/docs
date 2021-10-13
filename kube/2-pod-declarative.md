@@ -1,4 +1,4 @@
-#Os campos obrigatórios 
+# Object k8s
 
 O .yaml arquivo do objeto Kubernetes que você deseja criar, você precisará definir valores para os seguintes campos:
 
@@ -8,7 +8,7 @@ metadata- Dados que ajudam a identificar exclusivamente o objeto, incluindo uma 
 spec - Qual estado você deseja para o objeto
 
 
-###Criando um pod no modo declarativo:
+### Criando um pod no modo declarativo:
 
 Para um pod no modo declarativo o arquivo deve conter uma extensão 
 yaml.
@@ -23,6 +23,8 @@ spec:
 ```
 
 ### Criando o primeiro pod:
+
+pod-1.yaml
 
 ```
 apiVersion: v1
@@ -42,22 +44,21 @@ spec:
 
 ```
 
-```
-
-Vizualizando todos os pods :
+- Vizualizando todos os pods :
 
 ```
 kubectl get pods
 
 ``` 
 
-Vizualizar os pods mostrando mais atributos como ip
+- Vizualizar os pods mostrando mais atributos como ip
 
 ```
 kubectl get pods -o wide
+
 ```
 
-Realizando a verificação desse pod:
+- Realizando a verificação desse pod:
 
 ```
 kubectl describe pod pod-1

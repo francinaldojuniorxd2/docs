@@ -1,7 +1,18 @@
 # NodePort
 
 - Ao configurar o NodePort estamos disponibilzando a nossa aplicação 
-para rede externa "fora do cluster".
+para rede externa "fora do cluster", atrvés do ecaminhamento de portas,
+o NodePort disponibiliza portas para que clientes fora do cluster possa comunicar
+com serviços interno.
+
+- Para cada serviço aplicado para um determinado recurso é aplicado um porta no intervalo 
+de 30000 - 32767, quando essa porta não é fixada na declaração do serviço o Svc aplica
+um valor de porta nesse intervalo.
+
+- Quando o master recebe um determinada requisição nesse intervalo de porta ele encaminha a 
+requisição para o serviço, o serviço verifica qual a porta interna está vinculada para aquele 
+NodePort e encamiha a requisição para o recurso declarado.
+
 
 ### Alterar arquivo pod-1.yaml e svc-pod-1
 
@@ -73,5 +84,3 @@ determinada porta será encaminhada para porta 80 do nosso Pod.
 - Agora vá até o de navegador de sua preferência para testar se o serviço está funcionando corretamente  :
 
 **INTERNAL-IP:30000**
-
-

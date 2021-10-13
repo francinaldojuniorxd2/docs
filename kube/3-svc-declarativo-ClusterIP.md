@@ -17,6 +17,7 @@ spec:
   containers:
     - name: container-pod-1
       image: nginx:latest
+
 ```
 
 
@@ -46,7 +47,7 @@ kubectl delete pod nginx-1
 ### Aplicando configuração 
 
 ```
-    kubectl apply -f pod-1.yaml
+kubectl apply -f pod-1.yaml
 
 ```
 
@@ -108,8 +109,8 @@ spec:
 
 
 ```
-    kubectl apply -f pod-1.yaml
-    kubectl apply -f pod-2.yaml
+kubectl apply -f pod-1.yaml
+kubectl apply -f pod-2.yaml
 
 ```
 
