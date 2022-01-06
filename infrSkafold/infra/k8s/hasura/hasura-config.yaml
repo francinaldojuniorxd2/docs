@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hasura-config
+  labels:
+    app: hasura
+data:
+ HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+ HASURA_GRAPHQL_DEV_MODE: "true"
+ HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"

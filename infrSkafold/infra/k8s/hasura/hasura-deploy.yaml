@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hasura
+    hasuraService: custom
+  name: hasura
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: hasura
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hasura
+    spec:
+      containers:
+      - image: francinaldojuniorxd/hasura:v0.0.2
+        imagePullPolicy: IfNotPresent
+        name: hasura
+        envFrom: 
+            - configMapRef: 
+                name: hasura-config
+            - secretRef:
+                name: hasura-secret
+        ports:
+        - containerPort: 8080
+          protocol: 
+        resources:
+          limits:
+            cpu: 1500m
+            memory: 2500Mi
+          requests:
+            cpu: 1000m
+            memory: 1500Mi
+        livenessProbe: #Verificar se aplicação está saudável
+          httpGet:
+            path: /healthz
+            port: 8080
+          periodSeconds: 10 #A cada 10 segundo será envido um requisição para o 
+          failureThreshold: 3 #Se não conseguir realizar a operação três vezes irá realizar restart do Pod.
+          initialDelaySeconds: 60 #Ao iniciar o Pod após 30 segundos será iniciado a verficação da aplicação.
+        readinessProbe: # Verifica se a aplicação está pronta para receber requisições
+          httpGet:
+            path: /healthz
+            port: 8080
+          periodSeconds: 10   #A cada 10 segundo será enviado um requisição para o container na porta 8080         
+          failureThreshold: 3  #Assim que conseguir realizar a tarefá especificada por 3 vezes, irá enviar um sinal de pronto     
+          initialDelaySeconds: 3 #Ao iniciar o container após 3 segundos será iniciado a verficação da aplicação.
